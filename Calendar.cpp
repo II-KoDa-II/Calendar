@@ -21,11 +21,13 @@ int calendarDisplay (int weekPosition, int days, string month) {
   
   for (index = 1; index <= days; ++index) {
     cout << " " << index << " ";
+    
     if (index < 10) {
       cout << " ";
     }
     
     ++weekPosition;
+    
     if (weekPosition > 7) {
       cout << "\n";
       weekPosition -= 7;
@@ -49,23 +51,27 @@ int main() {
   if (startYear <= 0) {
     --leap;
   }
+  
   leap += (startYear - 1) / 4;
   
   weekPosition += startYear + leap;
+  
   while (weekPosition > 7) {
     weekPosition -= 7;
   }
+  
   while (weekPosition < 1) {
     weekPosition += 7;
   }
   
   weekPosition = calendarDisplay(weekPosition, 31, "January");
+  
   if (startYear % 4 == 0) {
     weekPosition = calendarDisplay(weekPosition, 29, "February");
-  }
-  else {
+  } else {
     weekPosition = calendarDisplay(weekPosition, 28, "February");
   }
+  
   weekPosition = calendarDisplay(weekPosition, 31, "March");
   weekPosition = calendarDisplay(weekPosition, 30, "April");
   weekPosition = calendarDisplay(weekPosition, 31, "May");
