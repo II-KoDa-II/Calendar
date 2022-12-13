@@ -10,24 +10,27 @@
 
 using namespace std;
 
-int daysPerWeek = 7;
-
-int calendarDisplay (int weekPosition, int dayIndexs, string month) {
-  int dayIndex;
+int calendarDisplay (int weekPosition, int days, string month) {
+  int index;
   
   cout << "\n\n\n\n" << month << "----------\n\nMon Tue Wed Thu Fri Sat Sun\n";
   
-  for (dayIndex = 1; dayIndex < weekPosition; ++dayIndex) {
+  for (index = 1; index < weekPosition; ++index) {
     cout << "    ";
   }
   
-  for (dayIndex = 1; dayIndex <= dayIndexs; ++dayIndex) {
-    printf("%02d  ", dayIndex);
+  for (index = 1; index <= days; ++index) {
+    cout << " " << index << " ";
+    
+    if (index < 10) {
+      cout << " ";
+    }
     
     ++weekPosition;
-    if (weekPosition > daysPerWeek) {
+    
+    if (weekPosition > 7) {
       cout << "\n";
-      weekPosition -= daysPerWeek;
+      weekPosition -= 7;
     }
   }
   
@@ -48,22 +51,27 @@ int main() {
   if (startYear <= 0) {
     --leap;
   }
-  leap += (startYear - 1) / 4 - (startYear - 1) / 100 + (startYear - 1) / 400;
+  
+  leap += (startYear - 1) / 4;
   
   weekPosition += startYear + leap;
-  while (weekPosition > daysPerWeek) {
-    weekPosition -= daysPerWeek;
+  
+  while (weekPosition > 7) {
+    weekPosition -= 7;
   }
+  
   while (weekPosition < 1) {
-    weekPosition += daysPerWeek;
+    weekPosition += 7;
   }
   
   weekPosition = calendarDisplay(weekPosition, 31, "January");
-  if ((startYear % 4 == 0 && startYear % 100 != 0) || startYear % 400 == 0) {
+  
+  if (startYear % 4 == 0) {
     weekPosition = calendarDisplay(weekPosition, 29, "February");
   } else {
     weekPosition = calendarDisplay(weekPosition, 28, "February");
   }
+  
   weekPosition = calendarDisplay(weekPosition, 31, "March");
   weekPosition = calendarDisplay(weekPosition, 30, "April");
   weekPosition = calendarDisplay(weekPosition, 31, "May");
