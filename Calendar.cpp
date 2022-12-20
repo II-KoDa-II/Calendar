@@ -25,8 +25,10 @@ int calendarDisplay (int weekPosition, int dayIndexs, string month) {
     printf("%02d  ", dayIndex);
     
     ++weekPosition;
+    
     if (weekPosition > daysPerWeek) {
       cout << "\n";
+      
       weekPosition -= daysPerWeek;
     }
   }
@@ -48,12 +50,14 @@ int main() {
   if (startYear <= 0) {
     --leap;
   }
+
   leap += (startYear - 1) / 4 - (startYear - 1) / 100 + (startYear - 1) / 400;
-  
   weekPosition += startYear + leap;
+  
   while (weekPosition > daysPerWeek) {
     weekPosition -= daysPerWeek;
   }
+  
   while (weekPosition < 1) {
     weekPosition += daysPerWeek;
   }
